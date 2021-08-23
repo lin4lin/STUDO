@@ -1,51 +1,45 @@
 package Klassen.Betreueransicht;
 
+import java.util.Date;
+
 public class Bewertungsbogen {
 private String student;
-private String kriterien;
+private Date datum;
 private String bewertung;
-public Bewertungsbogen(String student, String kriterien, String bewertung) {
-	super();
+
+// Konstruktor
+public Bewertungsbogen(String student, Date datum, String bewertung) {
 	this.student = student;
-	this.kriterien = kriterien;
+	this.datum = datum;
 	this.bewertung = bewertung;
 }
+
 public Bewertungsbogen() {
-	super();
 }
-/**
- * @return the student
- */
+
+
+// Getters & Setters
+
 public String getStudent() {
 	return student;
 }
-/**
- * @param student the student to set
- */
+
 public void setStudent(String student) {
 	this.student = student;
 }
-/**
- * @return the kriterien
- */
-public String getKriterien() {
-	return kriterien;
+
+public Date getDatum() {
+	return datum;
 }
-/**
- * @param kriterien the kriterien to set
- */
-public void setKriterien(String kriterien) {
-	this.kriterien = kriterien;
+
+public void setDatum(Date datum) {
+	this.datum = datum;
 }
-/**
- * @return the bewertung
- */
+
 public String getBewertung() {
 	return bewertung;
 }
-/**
- * @param bewertung the bewertung to set
- */
+
 public void setBewertung(String bewertung) {
 	this.bewertung = bewertung;
 }

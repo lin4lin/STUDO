@@ -5,21 +5,21 @@ import java.util.ArrayList;
 
 public class Kalender {
 
-	private ArrayList<StudentenTermin> Termine;
+	private ArrayList<Termin> Termine;
 
 	
 	// Konstruktor
 	public Kalender() {
-		this.Termine = new ArrayList<StudentenTermin>();
+		this.Termine = new ArrayList<Termin>();
 	}
 	
 	// Termin hinzufuegen
-	public void hinzufuegen(StudentenTermin termin) {
+	public void hinzufuegen(Termin termin) {
 		this.Termine.add(termin);
 	}
 	
 	// Termin entfernen
-	public void loeschen(StudentenTermin termin) {
+	public void loeschen(Termin termin) {
 		this.Termine.remove(termin);
 	}
 	
@@ -28,7 +28,7 @@ public class Kalender {
 	}
 	
 	// Termin bearbeiten
-	public void bearbeiten(StudentenTermin termin)
+	public void bearbeiten(Termin termin)
 	{
 		int idx = this.Termine.indexOf(termin);
 		this.Termine.set(idx, termin);
@@ -39,7 +39,7 @@ public class Kalender {
 	{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		if (this.Termine.size() > 0) {
-			for (StudentenTermin t : this.Termine) {
+			for (Termin t : this.Termine) {
 				System.out.println("Index: " + Integer.toString(this.Termine.indexOf(t)));
 				System.out.println("Titel: " + t.getBezeichnung());
 				System.out.println("Datum: " + dateFormat.format(t.getDatum()));
@@ -56,11 +56,11 @@ public class Kalender {
 	}
 
 	// Getter und Setter
-	public ArrayList<StudentenTermin> getTermine() {
+	public ArrayList<Termin> getTermine() {
 		return Termine;
 	}
 
-	public void setTermine(ArrayList<StudentenTermin> termine) {
+	public void setTermine(ArrayList<Termin> termine) {
 		Termine = termine;
 	}
 }

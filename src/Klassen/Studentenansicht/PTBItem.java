@@ -8,11 +8,14 @@ public class PTBItem {
 	private int semester;
 	private Date datum;
 	
+	// Konstruktor
 	public PTBItem(String thema, int semester, Date datum) {
 		this.thema = thema;
 		this.semester = semester;
 		this.datum = datum;
 	}
+	
+	// Getters & Setters
 
 	public String getThema() {
 		return thema;

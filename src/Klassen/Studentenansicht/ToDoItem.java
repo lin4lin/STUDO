@@ -5,10 +5,13 @@ public class ToDoItem {
 	private boolean fertig;
 	private String beschreibung;
 	
+	// Konstruktor
 	public ToDoItem(String beschreibung, boolean fertig) {
 		this.fertig = fertig;
 		this.beschreibung = beschreibung;
 	}
+	
+	// Getter & Setter
 	
 	public boolean isFertig() {
 		return fertig;
@@ -23,6 +26,4 @@ public class ToDoItem {
 		this.beschreibung = beschreibung;
 	}
 	
-	
-
 }

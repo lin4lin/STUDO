@@ -11,16 +11,24 @@ import java.text.SimpleDateFormat;
 // Package Imports
 import Klassen.Studentenansicht.*;
 import Klassen.Betreueransicht.*;
-import Klassen.Ausbilderansicht.*;
-
 
 public class Menu {
 	
-	// "Globale" Variablen
-	static Kalender studKalender = new Kalender();
-	static PTBBoard ptbBoard = new PTBBoard();
-	static ToDoListe todoListe = new ToDoListe();
-
+	//TODO Speichern und Laden in bzw. aus Datei implementieren.
+	
+	// "Globale" Variablen - Studentenansicht
+	public static Kalender studKalender = new Kalender();
+	public static PTBBoard ptbBoard = new PTBBoard();
+	public static ToDoListe todoListe = new ToDoListe();
+	
+	// "Globale" Variablen - Betreueransicht
+	public static Aufgabenboard aufgabenBoard = new Aufgabenboard();
+	public static Bewertungsuebersicht betreuerBewertungUebersicht = new Bewertungsuebersicht();
+	
+	// "Globale" Variablen - Ausbilderansicht
+	public static Kalender praxisKalender = new Kalender();
+	public static Bewertungsuebersicht ausbilderBewertungUebersicht = new Bewertungsuebersicht();
+	
 	public static void main(String[] args)	{
 		
 		// Programm starten
@@ -77,6 +85,7 @@ public class Menu {
 		System.out.println();
 	}
 	
+	// Studentenview zeigen
 	static void showStudentenAnsicht() {
 		cls();
 		printStudMenu();
@@ -122,12 +131,13 @@ public class Menu {
 							Date datum = enterDate();
 							System.out.println("Beschreibung: ");
 							String beschreibung = enterString();
-							StudentenTermin t = new StudentenTermin(datum,bezeichnung,beschreibung);
+							Termin t = new Termin(datum,bezeichnung,beschreibung);
 							studKalender.hinzufuegen(t);
 							continue;
 						}
 						else if (studKalenderAuswahl == 2) {
 							cls();
+							// Kalendereintrag loeschen
 							System.out.println("Studentenansicht > Kalender");
 							System.out.println("----------------------------");
 							System.out.println("LÖSCHEN---------------------");
@@ -142,12 +152,12 @@ public class Menu {
 						}
 					}
 				}
-				showStudentenAnsicht();
-				
+				showStudentenAnsicht();	
 			}
 			else if(studAuswahl == 2) {
 				while (true) {
 					cls();
+					// Hauptmenu anzeigen
 					System.out.println("Studentenansicht > PTB-Board");
 					System.out.println("----------------------------");
 					ptbBoard.anzeigen();
@@ -170,7 +180,7 @@ public class Menu {
 							System.out.println("Thema: ");
 							String thema = enterString();
 							Date datum = enterDate();
-							System.out.println("Beschreibung: ");
+							System.out.println("Semester: ");
 							int semester = enterInt();
 							PTBItem i = new PTBItem(thema,semester,datum);
 							ptbBoard.hinzufuegen(i);
@@ -178,6 +188,7 @@ public class Menu {
 						}
 						else if (ptbBoardAuswahl == 2) {
 							cls();
+							// PTB Eintrag loeschen
 							System.out.println("Studentenansicht > PTB-Board");
 							System.out.println("----------------------------");
 							System.out.println("LÖSCHEN---------------------");
@@ -197,6 +208,7 @@ public class Menu {
 			else if(studAuswahl == 3) {
 				while (true) {
 					cls();
+					// Hautpmenu anzeigen
 					System.out.println("Studentenansicht > ToDo-Liste");
 					System.out.println("-----------------------------");
 					todoListe.anzeigen();
@@ -212,7 +224,7 @@ public class Menu {
 						}
 						else if (todoAuswahl == 1) {
 							cls();
-							//Kalendereintrag hinzufügen
+							// To-Do hinzufügen
 							System.out.println("Studentenansicht > ToDo-Liste");
 							System.out.println("-----------------------------");
 							System.out.println("HINZUFÜGEN-------------------");
@@ -227,6 +239,7 @@ public class Menu {
 						}
 						else if (todoAuswahl == 2) {
 							cls();
+							// To-Do Status aendern
 							System.out.println("Studentenansicht > ToDo-Liste");
 							System.out.println("-----------------------------");
 							System.out.println("ÄNDERN-----------------------");
@@ -238,6 +251,7 @@ public class Menu {
 						}
 						else if (todoAuswahl == 3) {
 							cls();
+							// To-Do-Eintrag loeschen
 							System.out.println("Studentenansicht > ToDo-Liste");
 							System.out.println("-----------------------------");
 							System.out.println("LÖSCHEN----------------------");
@@ -252,6 +266,7 @@ public class Menu {
 						}
 					}
 				}
+				// Menu anzeigen
 				showStudentenAnsicht();
 			}
 		} 
@@ -290,14 +305,104 @@ public class Menu {
 				startProgram();
 			}
 			else if(betrAuswahl == 1) {
-				cls();
-				// Bewertungen anzeigen
-				// Bewertungen hinzufügen
+				while (true) {
+					cls();
+					// Hauptmenu anzeigen
+					System.out.println("Betreueransicht > Aufgabenboard");
+					System.out.println("-------------------------------");
+					aufgabenBoard.anzeigen();
+					System.out.println("(1) - Hinzufügen");
+					System.out.println("(2) - Löschen");
+					System.out.println("(0) - Zurück zur Betreueransicht");
+					int aufgabenAuswahl = chooseNumber();
+					if (Arrays.asList(0,1,2).contains(aufgabenAuswahl)) {
+						if (aufgabenAuswahl == 0) {
+							break;
+						}
+						else if (aufgabenAuswahl == 1) {
+							cls();
+							// Aufgabenelement hinzufuegen
+							System.out.println("Betreueransicht > Aufgabenboard");
+							System.out.println("-------------------------------");
+							System.out.println("HINZUFÜGEN---------------------");
+							System.out.println("-------------------------------");
+							System.out.println("Bezeichnung: ");
+							String bezeichnung = enterString();
+							System.out.println("Student: ");
+							String student = enterString();
+							Date datum = enterDate();
+							System.out.println("Beschreibung: ");
+							String beschreibung = enterString();
+							Aufgabe a = new Aufgabe(datum, student, bezeichnung, beschreibung);
+							aufgabenBoard.hinzufuegen(a);
+							continue;
+						}
+						else if (aufgabenAuswahl == 2) {
+							cls();
+							// Aufgabenelement loeschen
+							System.out.println("Betreueransicht > Aufgabenboard");
+							System.out.println("-------------------------------");
+							System.out.println("LÖSCHEN------------------------");
+							System.out.println("-------------------------------");
+							System.out.println("Bitte den Index des zu löschenden Eintrags eingeben: ");
+							int idx = enterInt();
+							aufgabenBoard.loeschen(idx);
+							continue;
+						}
+						else {
+							continue;
+						}
+					} 
+				}
+				// Menu anzeigen
+				showBetreuerAnsicht();
 			}
 			else if(betrAuswahl == 2) {
-				// Aufgaben anzeigen
-				// Aufgaben hinzufügen
-				cls();
+				while (true) {
+					cls();
+					System.out.println("Betreueransicht > Bewertungsuebersicht");
+					System.out.println("--------------------------------------");
+					betreuerBewertungUebersicht.anzeigen();
+					System.out.println("(1) - Hinzufügen");
+					System.out.println("(2) - Löschen");
+					System.out.println("(0) - Zurück zur Betreueransicht");
+					int bewertungenAuswahl = chooseNumber();
+					if (Arrays.asList(0,1,2).contains(bewertungenAuswahl)) {
+						if (bewertungenAuswahl == 0) {
+							break;
+						}
+						else if (bewertungenAuswahl == 1) {
+							cls();
+							System.out.println("Betreueransicht > Bewertungsuebersicht");
+							System.out.println("--------------------------------------");
+							System.out.println("HINZUFÜGEN----------------------------");
+							System.out.println("--------------------------------------");
+							System.out.println("Student: ");
+							String student = enterString();
+							Date datum = enterDate();
+							System.out.println("Bewertung: ");
+							String bewertung = enterString();
+							Bewertungsbogen b = new Bewertungsbogen(student, datum, bewertung);
+							betreuerBewertungUebersicht.hinzufuegen(b);
+							continue;
+						}
+						else if (bewertungenAuswahl == 2) {
+							cls();
+							System.out.println("Betreueransicht > Bewertungsuebersicht");
+							System.out.println("--------------------------------------");
+							System.out.println("LÖSCHEN-------------------------------");
+							System.out.println("--------------------------------------");
+							System.out.println("Bitte den Index des zu löschenden Eintrags eingeben: ");
+							int idx = enterInt();
+							betreuerBewertungUebersicht.loeschen(idx);
+							continue;
+						}
+						else {
+							continue;
+						}
+					} 
+				}
+				showBetreuerAnsicht();
 			}
 		} 
 		// Neuausgabe des Menu bei unerwarteter Eingabe
@@ -310,8 +415,8 @@ public class Menu {
 	static void printBetrMenu() {
 		System.out.println("> Betreueransicht");
 		System.out.println("---------------------------");
-		System.out.println("(1) - Bewertungen");
-		System.out.println("(2) - Aufgaben-Board");
+		System.out.println("(1) - Aufgaben-Board");
+		System.out.println("(2) - Bewertungen");
 		System.out.println("(0) - Zurück zum Hauptmenu");
 		System.out.println();
 	}
@@ -334,14 +439,105 @@ public class Menu {
 				startProgram();
 			}
 			else if(ausbAuswahl == 1) {
-				cls();
-				// Bewertungen anzeigen
-				// Bewertungen hinzufügen
+				while (true) {
+					cls();
+					// Menu anzeigen
+					System.out.println("Ausbilderansicht > Kalender");
+					System.out.println("---------------------------");
+					praxisKalender.anzeigen();
+					System.out.println("(1) - Hinzufügen");
+					System.out.println("(2) - Löschen");
+					System.out.println("(0) - Zurück zur Studentenansicht");
+					
+					int praxKalenderAuswahl = chooseNumber();
+					if (Arrays.asList(0,1,2).contains(praxKalenderAuswahl)) {
+						if (praxKalenderAuswahl == 0) {
+							break;
+						}
+						else if (praxKalenderAuswahl == 1) {
+							cls();
+							//Kalendereintrag hinzufügen
+							System.out.println("Ausbilderansicht > Kalender");
+							System.out.println("---------------------------");
+							System.out.println("HINZUFÜGEN-----------------");
+							System.out.println("---------------------------");
+							System.out.println("Titel: ");
+							String bezeichnung = enterString();
+							Date datum = enterDate();
+							System.out.println("Beschreibung: ");
+							String beschreibung = enterString();
+							Termin t = new Termin(datum,bezeichnung,beschreibung);
+							praxisKalender.hinzufuegen(t);
+							continue;
+						}
+						else if (praxKalenderAuswahl == 2) {
+							cls();
+							// Kalendereintrag loeschen
+							System.out.println("Ausbilderansicht > Kalender");
+							System.out.println("---------------------------");
+							System.out.println("LÖSCHEN--------------------");
+							System.out.println("---------------------------");
+							System.out.println("Bitte den Index des zu löschenden Eintrags eingeben: ");
+							int idx = enterInt();
+							praxisKalender.loeschen(idx);
+							continue;
+						}
+						else {
+							continue;
+						}
+					}
+				}
+				showAusbilderAnsicht();	
 			}
 			else if(ausbAuswahl == 2) {
-				// Aufgaben anzeigen
-				// Aufgaben hinzufügen
-				cls();
+				while (true) {
+					cls();
+					// Menu anzeigen
+					System.out.println("Ausbilderansicht > Bewertungsuebersicht");
+					System.out.println("---------------------------------------");
+					betreuerBewertungUebersicht.anzeigen();
+					System.out.println("(1) - Hinzufügen");
+					System.out.println("(2) - Löschen");
+					System.out.println("(0) - Zurück zur Betreueransicht");
+					int ausbBewertungenAuswahl = chooseNumber();
+					if (Arrays.asList(0,1,2).contains(ausbBewertungenAuswahl)) {
+						if (ausbBewertungenAuswahl == 0) {
+							break;
+						}
+						else if (ausbBewertungenAuswahl == 1) {
+							cls();
+							// Bewertung hinzufuegen
+							System.out.println("Ausbilderansicht > Bewertungsuebersicht");
+							System.out.println("---------------------------------------");
+							System.out.println("HINZUFÜGEN-----------------------------");
+							System.out.println("---------------------------------------");
+							System.out.println("Student: ");
+							String student = enterString();
+							Date datum = enterDate();
+							System.out.println("Bewertung: ");
+							String bewertung = enterString();
+							Bewertungsbogen b = new Bewertungsbogen(student, datum, bewertung);
+							ausbilderBewertungUebersicht.hinzufuegen(b);
+							continue;
+						}
+						else if (ausbBewertungenAuswahl == 2) {
+							cls();
+							// Bewertung loeschen
+							System.out.println("Ausbilderansicht > Bewertungsuebersicht");
+							System.out.println("---------------------------------------");
+							System.out.println("LÖSCHEN--------------------------------");
+							System.out.println("---------------------------------------");
+							System.out.println("Bitte den Index des zu löschenden Eintrags eingeben: ");
+							int idx = enterInt();
+							ausbilderBewertungUebersicht.loeschen(idx);
+							continue;
+						}
+						else {
+							continue;
+						}
+					} 
+				}
+				showAusbilderAnsicht();
 			}
 		} 
 		// Neuausgabe des Menu bei unerwarteter Eingabe
